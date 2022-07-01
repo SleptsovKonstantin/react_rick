@@ -4,6 +4,7 @@ const TodoForm = ({ addTask }) => {
   const [userInput, setUserInput] = useState("");
 
   const taskChange = (e) => {
+    // console.log(e.currentTarget.value);
     setUserInput(e.currentTarget.value);
   };
 

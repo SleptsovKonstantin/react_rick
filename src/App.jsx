@@ -13,7 +13,6 @@ function App() {
     currentValue: "",
   });
 
-
   const [todos, setTodos] = useState([]);
 
   const addTask = (userInput) => {
@@ -30,7 +29,7 @@ function App() {
   const deleteTask = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
-  //изменение состояния
+
   const handleToggle = (id) => {
     setTodos(
       todos.map((todo) =>
@@ -39,19 +38,27 @@ function App() {
     );
   };
 
-  const handleEditMode = (id) => {
-    setEditMode((prev) => ({ ...prev, id, on: true }));
-  };
-
-  const saveTask = (todo) => {
-    
+  const handleEditMode = (id, task) => {
+    setEditMode((prev) => ({ ...prev, id, on: true, oldValue: task }));
   };
 
   const cancelTask = (id) => {
-    setEditMode((prev) => ({ ...prev, id, on: false }))
+    setEditMode((prev) => ({ ...prev, id, on: false }));
   };
 
-  console.log(todos);
+  const saveTask = (editMode) => {
+    console.log("editMode.curent", editMode.currentValue);
+    setTodos(
+      todos.map((todo) =>
+        todo.id === editMode.id
+          ? { ...todo, task: editMode.currentValue }
+          : todo
+      )
+    );
+    // cancelTask(editMode.id);
+  };
+
+  console.log("todos", todos);
 
   return (
     <div className="App">
@@ -65,6 +72,7 @@ function App() {
         {todos.map((todo) => {
           return (
             <TodoTask
+              setEditMode={setEditMode}
               editMode={editMode}
               handleEditMode={handleEditMode}
               saveTask={saveTask}
