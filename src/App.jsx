@@ -39,7 +39,7 @@ function App() {
   };
 
   const handleEditMode = (id, task) => {
-    setEditMode((prev) => ({ ...prev, id, on: true, oldValue: task }));
+    setEditMode((prev) => ({ ...prev, id, on: true, currentValue: task }));
   };
 
   const cancelTask = (id) => {
@@ -55,10 +55,9 @@ function App() {
           : todo
       )
     );
-    // cancelTask(editMode.id);
+    cancelTask(editMode.id);
+    setEditMode((prev) => ({ ...prev, oldValue: "", currentValue: "" }));
   };
-
-  console.log("todos", todos);
 
   return (
     <div className="App">
@@ -72,13 +71,13 @@ function App() {
         {todos.map((todo) => {
           return (
             <TodoTask
-              setEditMode={setEditMode}
+              key={todo.id}
+              todo={todo}
               editMode={editMode}
+              setEditMode={setEditMode}
               handleEditMode={handleEditMode}
               saveTask={saveTask}
               cancelTask={cancelTask}
-              todo={todo}
-              key={todo.id}
               toogleTask={handleToggle}
               removeTask={deleteTask}
             />

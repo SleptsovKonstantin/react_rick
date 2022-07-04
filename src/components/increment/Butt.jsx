@@ -9,7 +9,7 @@ const Butt = () => {
   const reset = () => setValue(() => 0);
 
   return (
-    <div>
+    <div className='increment'>
       <button onClick={plus}>increment</button>
       <button onClick={minus}>decrement</button>
       <button onClick={reset}>reset</button>

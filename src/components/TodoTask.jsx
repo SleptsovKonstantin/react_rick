@@ -1,22 +1,22 @@
-import { useState } from "react";
-
 const TodoTask = ({
-  editMode,
-  handleEditMode,
   todo,
   toogleTask,
   removeTask,
-  saveTask,
   cancelTask,
+  handleEditMode,
+  saveTask,
+  editMode,
   setEditMode,
 }) => {
   const taskChangeNew = (e) => {
+    console.log(editMode);
     setEditMode((prev) => ({ ...prev, currentValue: e.target.value }));
+    console.log(editMode.currentValue);
   };
 
   const handleSubmitNew = (e) => {
-    console.log("editmode comp", editMode);
     e.preventDefault();
+    console.log("editMode click", editMode);
     saveTask(editMode);
   };
 
@@ -31,32 +31,34 @@ const TodoTask = ({
       {editMode.on && editMode.id === todo.id ? (
         <div>
           <input
-            value={editMode.currentValue = todo.task}
+            value={editMode.currentValue}
             type="text"
             onChange={taskChangeNew}
             onKeyDown={KeyPress}
           />
-          <div onClick={() => saveTask(todo)}>save</div>
-          <div onClick={() => cancelTask(todo.id)}>X</div>
+          <button onClick={() => saveTask(editMode)}>SAVE</button>
+          <button onClick={() => cancelTask(todo.id)}>CANCEL</button>
         </div>
       ) : (
-        <div>
+        <div className="oneTask">
           <div
             className={todo.complete ? "item_text_comp" : "item_text"}
-            onClick={() => toogleTask(todo.id)}
           >
             {todo.task}
-            <input type="checkbox"></input>
+            <input 
+              type="checkbox"  
+              onClick={() => toogleTask(todo.id)}>
+              </input>
           </div>
-          <div className="item-delete" onClick={() => removeTask(todo.id)}>
-            X
-          </div>
-          <div
+          <button className="item-delete" onClick={() => removeTask(todo.id)}>
+            DELETE
+          </button>
+          <button
             className="item-update"
             onClick={() => handleEditMode(todo.id, todo.task)}
           >
-            update
-          </div>
+            UPDATE
+          </button>
         </div>
       )}
     </div>

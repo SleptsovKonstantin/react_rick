@@ -10,16 +10,14 @@
 }
 
 .item-list {
-  display: grid;
+  display: flex;
   justify-content: center;
+  flex-direction: column;
 
   .item-todo {
-    margin: 10px;
     display: flex;
-    text-align: center;
-    justify-content:space-evenly;
-    width: 300px;
-  
+    justify-content: center;
+
     .item_text_comp {
       text-decoration: line-through;
       text-decoration-color: red;
@@ -27,8 +25,19 @@
   }
 }
 
+button {
+  cursor: pointer;
+}
+
+.oneTask {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  width: 300px;
+}
+
 .item-delete {
- cursor: pointer;
+  cursor: pointer;
 }
 
 // .App-header {
@@ -41,3 +50,7 @@
 //   font-size: calc(10px + 2vmin);
 //   color: white;
 // }
+
+.increment {
+  margin-top: 40%;
+}
